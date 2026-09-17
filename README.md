@@ -5,6 +5,8 @@ M4B audiobook files from an ElSci One series page. Choose a section in the
 terminal, and the tool opens Chromium to download its files in batches of up to
 four. Downloads are organized by format and series name.
 
+Use this tool only to download material you have permission to access and save.
+
 ## Installation
 
 Requires **Python 3.10 or newer**. The commands below use Windows PowerShell.

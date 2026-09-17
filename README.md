@@ -2,7 +2,7 @@
 
 This requires Python **3.10 or newer**.
 
-Make sure that your terminal is in the same folder level where elsi-4.py is located.
+Make sure that your terminal is in the same folder level where elsci-4.py is located.
 
 For a fresh install, follow these commands:
 
@@ -70,3 +70,9 @@ handling in `downloader.py`.
 
 `app.py` owns prompts and browser startup; `downloader.py` owns page interaction
 and bounded batches; `models.py` defines the configuration objects.
+
+Run the offline checks with:
+
+```sh
+python -m unittest discover -s ./tests
+```

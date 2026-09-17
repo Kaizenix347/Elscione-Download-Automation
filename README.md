@@ -1,12 +1,18 @@
-# Installation from Scratch
+# ElSci Downloader
 
-This requires Python **3.10 or newer**.
+A Python command-line tool that uses Playwright to download matching EPUB or
+M4B audiobook files from an ElSci One series page. Choose a section in the
+terminal, and the tool opens Chromium to download its files in batches of up to
+four. Downloads are organized by format and series name.
 
-Make sure that your terminal is in the same folder level where elsci-4.py is located.
+## Installation
 
-For a fresh install, follow these commands:
+Requires **Python 3.10 or newer**. The commands below use Windows PowerShell.
 
-```sh
+Download or clone this repository, then open a terminal in the project folder
+containing `elsci-4.py`.
+
+```powershell
 # Create a fresh virtual environment
 py -m venv .venv
 
@@ -20,23 +26,51 @@ py -m venv .venv
 
 ## How to Use the Downloader
 
-When you run the code, you will be prompted in the terminal
+1. Run the downloader using the command above.
+2. At the following prompt, paste the URL of an ElSci One series page:
 
-```sh
+```text
 Enter the ElSci One series URL:
 ```
 
-Enter the URL.
+3. Chromium opens and loads the series page. Return to the terminal to choose a
+   section:
 
-The next step requires a manual step where you choose which file you want to download: EPUB or audiobook. For EPUB, you have 4 different options; follow the terminal prompt after inputting the ElSci URL. After a pop-up, a browser will appear, and it will automatically download all the files associated with the EPUB type or audiobook type you entered.
+| Choice | Files |
+| --- | --- |
+| `k` | Kobo EPUBs |
+| `ki` | Kindle EPUBs |
+| `p` | Premium EPUBs |
+| `s` | Seven Seas EPUBs |
+| `a` | M4B audiobooks |
 
-Lastly, the browser will close after all the downloads are complete.
+4. Leave the browser open while the tool downloads the matching files. Progress
+   appears in the terminal, and the browser closes when the run ends.
 
 ## Where to Find the Download Folder
 
-It should be located at the same folder level as elsci-4.py, in a folder called "download".
+Files are saved inside the project's `download` folder:
 
-## Add a section
+```text
+download/
+  epub/<series name>/
+  audiobooks/<series name>/
+```
+
+## Known limitations
+
+- The tool depends on the site's current page layout and download controls.
+  Site changes may require updates to the selectors.
+- Failed downloads are not retried automatically. An error stops the run after
+  the current batch finishes; files already saved remain in the download folder.
+- Existing files are not skipped. Downloading a file with the same name into
+  the same folder can overwrite it.
+- Series names are used directly as folder names. Names containing characters
+  that are invalid in file paths may cause a run to fail.
+
+## Development
+
+### Add a section
 
 Create `elsci_downloader/sections/yen_press.py`:
 
@@ -52,7 +86,7 @@ The menu, item filtering, and destination follow automatically. Keys must be
 unique. Filtering matches the tag immediately followed by the extension;
 an empty tag matches all items containing that extension.
 
-## Add a file type
+### Add a file type
 
 Create `elsci_downloader/file_types/pdf.py`:
 
@@ -71,8 +105,17 @@ handling in `downloader.py`.
 `app.py` owns prompts and browser startup; `downloader.py` owns page interaction
 and bounded batches; `models.py` defines the configuration objects.
 
-Run the offline checks with:
+### Run tests
 
-```sh
-python -m unittest discover -s ./tests
+Run the offline unit tests from the project folder:
+
+```powershell
+.\.venv\Scripts\python.exe -m unittest discover -s ./tests
 ```
+
+These tests cover configuration, bounded download batches, and page cleanup on
+navigation failure. They do not verify downloads against the live site.
+
+## License
+
+This project's source code is available under the [MIT License](LICENSE).

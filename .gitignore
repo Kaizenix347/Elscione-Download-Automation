@@ -1,0 +1,9 @@
+*.json
+download/
+.venv/
+env/
+venv/
+cookies/
+__pycache__/
+*.py[cod]
+/%SystemDrive%/

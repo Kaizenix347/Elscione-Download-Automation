@@ -28,7 +28,7 @@ pip install playwright
 playwright install chromium
 
 # Run the downloader
-.\.venv\Scripts\python.exe .\elsci-4.py
+.\elsci-4.py
 ```
 
 ## How to Use the Downloader

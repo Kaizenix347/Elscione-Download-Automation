@@ -15,6 +15,10 @@ Download or clone this repository, then open a terminal in the project folder
 containing `elsci-4.py`.
 
 ```powershell
+# Clone the repo
+git clone https://github.com/Kaizenix347/Elscione-Download-Automation.git
+cd Elscione-Download-Automation/
+
 # Create a fresh virtual environment
 python -m venv .venv
 source .venv/bin/activate

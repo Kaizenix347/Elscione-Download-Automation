@@ -16,11 +16,12 @@ containing `elsci-4.py`.
 
 ```powershell
 # Create a fresh virtual environment
-py -m venv .venv
+python -m venv .venv
+source .venv/bin/activate
 
 # Install Playwright and its browser
-.\.venv\Scripts\python.exe -m pip install playwright
-.\.venv\Scripts\python.exe -m playwright install chromium
+pip install playwright
+playwright install chromium
 
 # Run the downloader
 .\.venv\Scripts\python.exe .\elsci-4.py
